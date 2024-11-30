@@ -142,7 +142,7 @@
               }
           }
 
-          input.appendEventListener("input", () => {
+          input.addEventListener("input", () => {
             const newOutput = document.createElement("div");
             newOutput.style.whiteSpace = "pre-wrap";
             newOutput.style.wordBreak = "break-all";
