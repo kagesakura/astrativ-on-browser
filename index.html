@@ -16,6 +16,31 @@
           const input = document.getElementById("script-input");
           const inputForm = document.getElementById("script-input-form");
 
+          inputForm.addEventListener("submit", e => {
+              e.preventDefault();
+
+              const newOutput = document.createElement("div");
+              const inputValue = input.value;
+              newOutput.textContent = inputValue;
+              output.appendChild(newOutput);
+
+              input.value = "";
+
+              executeAstrativ(inputValue);
+          });
+
+          document.documentElement.addEventListener("click", e => {
+              if (output.contains(e.target)) return;
+              input.focus();
+          });
+          document.documentElement.addEventListener("keydown", e => {
+              if (e.altKey || e.metaKey || e.altKey) return;
+              input.focus();
+          });
+          window.addEventListener("load", () => {
+              input.focus();
+          });
+
           const bytes = await fetch("./astrativ.wasm").then(r => r.arrayBuffer());
           const mod = new WebAssembly.Module(bytes);
           const instance = new WebAssembly.Instance(mod, {
@@ -140,28 +165,6 @@
                   output.appendChild(newOutput);
               }
           }
-
-          inputForm.addEventListener("submit", e => {
-              e.preventDefault();
-
-              const newOutput = document.createElement("div");
-              const inputValue = input.value;
-              newOutput.textContent = inputValue;
-              output.appendChild(newOutput);
-
-              input.value = "";
-
-              executeAstrativ(inputValue);
-          });
-
-          document.documentElement.addEventListener("click", e => {
-              if (output.contains(e.target)) return;
-              input.focus();
-          });
-          document.documentElement.addEventListener("keydown", e => {
-              if (e.altKey || e.metaKey || e.altKey) return;
-              input.focus();
-          });
       }();
     </script>
   </body>
