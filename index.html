@@ -9,7 +9,7 @@
     <script type="text/javascript">
       ~async function() {
           const output = document.getElementById("output");
-          const bytes = await fetch("./astrativ.wasm").then(r => r.awwayBuffer());
+          const bytes = await fetch("./astrativ.wasm").then(r => r.arrayBuffer());
           const mod = new WebAssembly.Module(bytes);
           const instance = new WebAssembly.Instance(mod, {
               wbg: {
