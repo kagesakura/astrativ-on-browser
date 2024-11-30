@@ -6,11 +6,15 @@
   </head>
   <body style="background:black">
     <div id="output" style="color:white"></div>
-    <input id="script-input" type="text" style="border: 0px; outline: 0px; background: black; color: white; box-sizing: border-box; margin: 0px; padding: 0px; font-family: monospace; font-size: 1em; white-space: pre-wrap; width: 100%;">
+    <form id="script-input-form">
+      <input id="script-input" type="text" style="border: 0px; outline: 0px; background: black; color: white; box-sizing: border-box; margin: 0px; padding: 0px; font-family: monospace; font-size: 1em; white-space: pre-wrap; width: 100%;">
+    </form>
     <script type="text/javascript">
       ~async function() {
           const output = document.getElementById("output");
           const input = document.getElementById("script-input");
+          const inputForm = document.getElementById("script-input-from");
+
           const bytes = await fetch("./astrativ.wasm").then(r => r.arrayBuffer());
           const mod = new WebAssembly.Module(bytes);
           const instance = new WebAssembly.Instance(mod, {
@@ -142,7 +146,9 @@
               }
           }
 
-          input.addEventListener("input", () => {
+          inputForm.addEventListener("submit", e => {
+            e.preventDefault();
+
             const newOutput = document.createElement("div");
             newOutput.style.whiteSpace = "pre-wrap";
             newOutput.style.wordBreak = "break-all";
