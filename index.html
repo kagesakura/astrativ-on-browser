@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>Astrativ (Dynamically-typed Language)</title>
   </head>
-  <body>
-    <div id="output"></div>
+  <body style="background:black">
+    <div id="output" style="color:white"></div>
+    <input id="script-input" type="text" style="border: 0px; outline: 0px; background: black; color: white; box-sizing: border-box; margin: 0px; padding: 0px; font-family: monospace; font-size: 1em; white-space: pre-wrap; width: 100%;">
     <script type="text/javascript">
       ~async function() {
           const output = document.getElementById("output");
+          const input = document.getElementById("script-input");
           const bytes = await fetch("./astrativ.wasm").then(r => r.arrayBuffer());
           const mod = new WebAssembly.Module(bytes);
           const instance = new WebAssembly.Instance(mod, {
@@ -24,7 +26,7 @@
                       newOutput.style.whiteSpace = "pre-wrap";
                       newOutput.style.wordBreak = "break-all";
                       newOutput.style.fontFamily = "monospace";
-                      newOutput.textContent += `${getObject(arg0)}`;
+                      newOutput.textContent = `${getObject(arg0)}`;
                       output.appendChild(newOutput);
                   },
                   __wbg_now_b7a162010a9e75b4() {
@@ -124,7 +126,7 @@
               return ptr;
           }
       
-          globalThis.executeAstrativ = function executeAstrativ(source_code) {
+          function executeAstrativ(source_code) {
               try {
                   const ptr0 = passStringToWasm0(source_code, instance.exports.__wbindgen_malloc, instance.exports.__wbindgen_realloc);
                   const len0 = WASM_VECTOR_LEN;
@@ -135,10 +137,24 @@
                   newOutput.style.wordBreak = "break-all";
                   newOutput.style.fontFamily = "monospace";
                   newOutput.style.color = "red";
-                  newOutput.textContent += `${e}`;
+                  newOutput.textContent = `${e}`;
                   output.appendChild(newOutput);
               }
-          };
+          }
+
+          input.appendEventListener("input", () => {
+            const newOutput = document.createElement("div");
+            newOutput.style.whiteSpace = "pre-wrap";
+            newOutput.style.wordBreak = "break-all";
+            newOutput.style.fontFamily = "monospace";
+            const inputValue = input.value;
+            newOutput.textContent = inputValue;
+            output.appendChild(newOutput);
+
+            input.value = "";
+
+            executeAstrativ(inputValue)l
+          });
       }();
     </script>
   </body>
