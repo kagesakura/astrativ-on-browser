@@ -141,19 +141,26 @@
           }
 
           inputForm.addEventListener("submit", e => {
-            e.preventDefault();
+              e.preventDefault();
 
-            const newOutput = document.createElement("div");
-            const inputValue = input.value;
-            newOutput.textContent = inputValue;
-            output.appendChild(newOutput);
+              const newOutput = document.createElement("div");
+              const inputValue = input.value;
+              newOutput.textContent = inputValue;
+              output.appendChild(newOutput);
 
-            input.value = "";
+              input.value = "";
 
-            executeAstrativ(inputValue);
+              executeAstrativ(inputValue);
           });
 
-          document.body.addEventListener("click", () => input.focus());
+          document.documentElement.addEventListener("click", e => {
+              if (output.contains(e.target)) return;
+              input.focus();
+          });
+          document.documentElement.addEventListener("keydown", e => {
+              if (e.altKey || e.metaKey || e.altKey) return;
+              input.focus();
+          });
       }();
     </script>
   </body>
