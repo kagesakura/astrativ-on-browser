@@ -6,7 +6,7 @@
     <title>Astrativ (Dynamically-typed Language)</title>
   </head>
   <body style="background: black; margin: 0px; padding: 0px;">
-    <div style="margin: 8px; padding: 0px;">
+    <div id="output-wrapper" style="margin: 8px; padding: 0px;">
       <div id="output" style="color: white; white-space: pre-wrap; word-break: break-all; font-family: monospace;"></div>
       <form id="script-input-form" style="margin: 0px; padding: 0px; line-height: 0px;">
         <input id="script-input" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="border: 0px; outline: 0px; background: black; color: white; box-sizing: border-box; margin: 0px; padding: 0px; font-family: monospace; font-size: 1em; white-space: pre-wrap; width: 100%;">
@@ -15,6 +15,7 @@
     <script type="text/javascript">
       ~async function() {
           const output = document.getElementById("output");
+          const outputWrapper = document.getElementById("output-wrapper");
           const input = document.getElementById("script-input");
           const inputForm = document.getElementById("script-input-form");
 
@@ -36,6 +37,10 @@
               input.focus();
           });
           window.addEventListener("load", () => {
+              input.focus();
+          });
+          document.documentElement.addEventListener("click", e => {
+              if (outputWrapper.contains(e.target)) return;
               input.focus();
           });
 
