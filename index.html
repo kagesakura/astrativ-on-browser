@@ -157,12 +157,13 @@
               WASM_VECTOR_LEN = offset;
               return ptr;
           }
-      
+
+          const globals = instance.exports.initialize_context() >>> 0;
           function executeAstrativ(source_code) {
               try {
                   const ptr0 = passStringToWasm0(source_code, instance.exports.__wbindgen_malloc, instance.exports.__wbindgen_realloc);
                   const len0 = WASM_VECTOR_LEN;
-                  instance.exports.execute(ptr0, len0);
+                  instance.exports.execute(globals, ptr0, len0);
               } catch(e) {
                   const newOutput = document.createElement("div");
                   newOutput.style.color = "red";
