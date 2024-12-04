@@ -16,5 +16,5 @@ const withCache = async (request) => {
 };
 
 self.addEventListener("fetch", e => {
-  event.respondWith(withCache(e.request));
+  e.respondWith(withCache(e.request));
 });
