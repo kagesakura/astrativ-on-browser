@@ -33,6 +33,10 @@
               const newOutput = document.createElement("div");
               newOutput.textContent = inputValue;
               output.appendChild(newOutput);
+              window.scrollTo({
+                  top: window.innerHeight,
+                  behavior: "instant"
+              });
 
               input.value = "";
 
@@ -42,8 +46,8 @@
           document.documentElement.addEventListener("keydown", e => {
               if (e.altKey || e.metaKey || e.ctrlKey) return;
               window.scrollTo({
-                top: window.innerHeight,
-                behavior: "instant"
+                  top: window.innerHeight,
+                  behavior: "instant"
               });
               if (e.code === "ArrowUp") {
                   e.preventDefault();
@@ -86,6 +90,10 @@
                       const newOutput = document.createElement("div");
                       newOutput.textContent = `${getObject(arg0)}`;
                       output.appendChild(newOutput);
+                    window.scrollTo({
+                        top: window.innerHeight,
+                        behavior: "instant"
+                    });
                   },
                   __wbg_now_b7a162010a9e75b4() {
                       return Date.now();
@@ -195,6 +203,10 @@
                   newOutput.style.color = "red";
                   newOutput.textContent = `${e}`;
                   output.appendChild(newOutput);
+                  window.scrollTo({
+                      top: window.innerHeight,
+                      behavior: "instant"
+                  });
               }
           }
       }();
