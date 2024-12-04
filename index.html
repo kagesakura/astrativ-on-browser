@@ -22,8 +22,9 @@
           const inputForm = document.getElementById("script-input-form");
 
           const scrollToTheEnd = () => requestAnimationFrame(() => {
+              const body = document.body, html = document.documentElement;
               window.scrollTo({
-                  top: window.innerHeight,
+                  top: Math.max(window.innerHeight, body.clientHeight, body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight),
                   behavior: "instant"
               });
           });
