@@ -21,6 +21,12 @@
           const input = document.getElementById("script-input");
           const inputForm = document.getElementById("script-input-form");
 
+          const scrollToTheEnd = () => requestAnimationFrame(() => {
+              window.scrollTo({
+                  top: window.innerHeight,
+                  behavior: "instant"
+              });
+          });
           const inputHistory = [];
           let inputHistoryIndex = 0;
           inputForm.addEventListener("submit", e => {
@@ -33,10 +39,7 @@
               const newOutput = document.createElement("div");
               newOutput.textContent = inputValue;
               output.appendChild(newOutput);
-              window.scrollTo({
-                  top: window.innerHeight,
-                  behavior: "instant"
-              });
+              scrollToTheEnd();
 
               input.value = "";
 
@@ -45,15 +48,12 @@
 
           document.documentElement.addEventListener("keydown", e => {
               if (e.altKey || e.metaKey || e.ctrlKey) return;
-              window.scrollTo({
-                  top: window.innerHeight,
-                  behavior: "instant"
-              });
               if (e.code === "ArrowUp") {
                   e.preventDefault();
                   if (inputHistoryIndex >= 1) {
                       inputHistoryIndex--;
                       input.value = inputHistory[inputHistoryIndex];
+                      scrollToTheEnd();
                   }
                   return;
               }
@@ -62,10 +62,12 @@
                   if (inputHistory.length - 1 > inputHistoryIndex) {
                       inputHistoryIndex++;
                       input.value = inputHistory[inputHistoryIndex];
+                      scrollToTheEnd();
                   }
                   return;
               }
               input.focus();
+              scrollToTheEnd();
           });
           window.addEventListener("load", () => {
               input.focus();
@@ -90,10 +92,7 @@
                       const newOutput = document.createElement("div");
                       newOutput.textContent = `${getObject(arg0)}`;
                       output.appendChild(newOutput);
-                    window.scrollTo({
-                        top: window.innerHeight,
-                        behavior: "instant"
-                    });
+                      scrollToTheEnd();
                   },
                   __wbg_now_b7a162010a9e75b4() {
                       return Date.now();
@@ -203,10 +202,7 @@
                   newOutput.style.color = "red";
                   newOutput.textContent = `${e}`;
                   output.appendChild(newOutput);
-                  window.scrollTo({
-                      top: window.innerHeight,
-                      behavior: "instant"
-                  });
+                  scrollToTheEnd();
               }
           }
       }();
