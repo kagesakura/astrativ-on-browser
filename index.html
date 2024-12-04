@@ -41,6 +41,10 @@
 
           document.documentElement.addEventListener("keydown", e => {
               if (e.altKey || e.metaKey || e.ctrlKey) return;
+              window.scrollTo({
+                top: window.innerHeight,
+                behavior: "instant"
+              });
               if (e.code === "ArrowUp") {
                   e.preventDefault();
                   if (inputHistoryIndex >= 1) {
