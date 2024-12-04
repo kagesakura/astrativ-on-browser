@@ -28,8 +28,8 @@
 
               const newOutput = document.createElement("div");
               const inputValue = input.value;
-              inputHistoryIndex = inputHistory.length;
               inputHistory[inputHistory.length] = inputValue;
+              inputHistoryIndex = inputHistory.length;
               newOutput.textContent = inputValue;
               output.appendChild(newOutput);
 
@@ -42,14 +42,18 @@
               if (e.altKey || e.metaKey || e.ctrlKey) return;
               if (e.code === "ArrowUp") {
                   e.preventDefault();
-                  inputHistoryIndex = Math.max(inputHistoryIndex - 1, 0);
-                  input.value = inputHistory[inputHistoryIndex];
+                  if (inputHistoryIndex >= 1) {
+                      inputHistoryIndex--;
+                      input.value = inputHistory[inputHistoryIndex];
+                  }
                   return;
               }
               if (e.code === "ArrowDown") {
                   e.preventDefault();
-                  inputHistoryIndex = Math.min(inputHistoryIndex + 1, inputHistory.length - 1);
-                  input.value = inputHistory[inputHistoryIndex];
+                  if (inputHistory.length - 1 > inputHistoryIndex) {
+                      inputHistoryIndex++;
+                      input.value = inputHistory[inputHistoryIndex];
+                  }
                   return;
               }
               input.focus();
