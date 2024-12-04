@@ -21,11 +21,15 @@
           const input = document.getElementById("script-input");
           const inputForm = document.getElementById("script-input-form");
 
+          const inputHistory = [];
+          let inputHistoryIndex = 0;
           inputForm.addEventListener("submit", e => {
               e.preventDefault();
 
               const newOutput = document.createElement("div");
               const inputValue = input.value;
+              inputHistoryIndex = inputHistory.length;
+              inputHistory[inputHistory.length] = inputValue;
               newOutput.textContent = inputValue;
               output.appendChild(newOutput);
 
@@ -36,6 +40,18 @@
 
           document.documentElement.addEventListener("keydown", e => {
               if (e.altKey || e.metaKey || e.ctrlKey) return;
+              if (e.code === "ArrowUp") {
+                  e.preventDefault();
+                  inputHistoryIndex = Math.max(inputHistoryIndex - 1, 0);
+                  input.value = inputHistory[inputHistoryIndex];
+                  return;
+              }
+              if (e.code === "ArrowDown") {
+                  e.preventDefault();
+                  inputHistoryIndex = Math.min(inputHistoryIndex + 1, inputHistory.length - 1);
+                  input.value = inputHistory[inputHistoryIndex];
+                  return;
+              }
               input.focus();
           });
           window.addEventListener("load", () => {
@@ -43,6 +59,7 @@
           });
           document.documentElement.addEventListener("click", e => {
               if (outputWrapper.contains(e.target)) return;
+              if (getSelection().type === "Range") return;
               input.focus();
           });
 
