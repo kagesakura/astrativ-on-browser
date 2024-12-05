@@ -24,7 +24,7 @@
           const scrollToTheEnd = () => requestAnimationFrame(() => {
               const body = document.body, html = document.documentElement;
               window.scrollTo({
-                  top: Math.max(window.innerHeight, body.clientHeight, body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight),
+                  top: Math.max(0, Math.max(window.innerHeight, body.clientHeight, body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - window.innerHeight),
                   behavior: "instant"
               });
           });
