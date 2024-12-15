@@ -1,7 +1,7 @@
 # astrativ
 ## Description
 ブラウザー上で動くようになった自作言語です。  
-リンク：https://kagesakura.github.io/astrativ-language-on-browser/  
+リンク：https://kagesakura.github.io/astrativ-on-browser/  
 一回実行するごとに，ローカル変数は**消えます**。その一回の実行の中でしか生きていません。  
 グローバル変数は保持されます。  
 ## Example
