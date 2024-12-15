@@ -72,7 +72,7 @@ e.g.) `return 2`
   e.g.) `${ a: 1, b: 2 }`
   - array  
   e.g.) `[1, 2, 4, 6, 12, 24, 36, 48, 60]`
-- Global Varisbles
+- Global Variables
 `global.variable_name`  
 e.g.) `global.print`
 - Variable Declaration
