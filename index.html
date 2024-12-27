@@ -40,6 +40,7 @@
           const inputHistory = [];
           let inputHistoryIndex = 0;
           const fitTextarea = () => {
+              if (isMobile) return;
               input.style.height = "3px";
               input.style.height = input.scrollHeight + "px";
           };
