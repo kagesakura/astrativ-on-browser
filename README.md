@@ -38,7 +38,7 @@ while i < global.len(arr): {
 ```
 var dict = ${ dogs: 29, cats: 32 };
 global.print("There are", dict.dogs, "dogs.");
-global.print("There are", dict["cats"], "cats.");
+global.print("There are", dict[:cats], "cats.");
 ```
 ## Operators
 ### Binary Operators
