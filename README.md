@@ -29,7 +29,7 @@ while i < 19: {
 ```
 var arr = ["apple", "banana", "grape"];
 var i = 0;
-while i < global.len(arr): {
+while i < arr.length: {
   global.print(arr[i]);
   i += 1;
 }
